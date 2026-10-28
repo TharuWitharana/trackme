@@ -1,0 +1,341 @@
+:root,
+html[data-theme="pink"] {
+  --accent: #eb2f96;
+  --bg: #fff0f6;
+  --bg-strong: #ffd6e7;
+  --good: #52c41a;
+  --warn: #faad14;
+  --bad: #ff4d4f;
+  --water: #1890ff;
+  --muted: #bfbfbf;
+  --text: #1f1f1f;
+  --text-muted: #8c8c8c;
+}
+
+html[data-theme="blue"] {
+  --accent: #1677ff;
+  --bg: #f0f5ff;
+  --bg-strong: #d6e4ff;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* thin light scrollbar, same as the entry popup */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #e3e3e3 transparent;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg-strong) 0%, var(--bg) 360px);
+  background-color: var(--bg);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.loading {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Layout */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--bg-strong);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px 96px;
+}
+
+/* .ant-btn prefix so this beats antd's own `position: relative` */
+.ant-btn.fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* Summary */
+.stat-icon {
+  display: inline-flex;
+  margin-right: 4px;
+  font-size: 18px;
+  color: var(--accent);
+}
+
+/* Calendar */
+.calendar-header {
+  padding: 4px 0 12px;
+}
+
+.calendar-title {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.calendar-card .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+  margin: 0 2px;
+  padding: 4px 6px 0;
+}
+
+.calendar-card .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-content {
+  height: 64px;
+}
+
+/* antd keeps the first theme's selected-day colour after switching, so use ours */
+.calendar-card .ant-picker-calendar.ant-picker-calendar-full .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-calendar-date {
+  background: var(--bg);
+}
+
+.day-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.day-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.day-icon small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+  font-size: 13px;
+}
+
+/* Entry popup: the form scrolls, the title and Save/Delete stay in view */
+.entry-modal .ant-modal .ant-modal-body {
+  max-height: calc(100dvh - 200px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* gap between the cards and the scrollbar; the negative margin moves the
+     scrollbar into the modal's side padding so the cards stay full width */
+  padding-right: 12px;
+  margin-right: -16px;
+  scrollbar-width: thin;
+  scrollbar-color: #e3e3e3 transparent;
+}
+
+.save-btn {
+  min-width: 160px;
+}
+
+/* Entry form */
+.form-block {
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: var(--bg);
+}
+
+.form-section {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.hint {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.form-block .ant-form-item.follow-up {
+  margin: 12px 0 0;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.tile-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 6px;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.tile-icon {
+  display: inline-flex;
+  font-size: 24px;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.tile-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 11px;
+}
+
+.tile-accent.tile-on {
+  border-color: var(--accent);
+}
+
+.tile-accent.tile-on .tile-icon,
+.tile-accent .tile-check {
+  color: var(--accent);
+}
+
+.tile-good.tile-on {
+  border-color: var(--good);
+  background: #f6ffed;
+}
+
+.tile-good.tile-on .tile-icon,
+.tile-good .tile-check {
+  color: var(--good);
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepper-value {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.stepper-value small {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.sugar-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Phones */
+@media (max-width: 767px) {
+  .day-icons {
+    justify-content: center;
+    gap: 2px 3px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .topbar {
+    padding: 10px 16px;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  .content {
+    padding: 12px 16px 96px;
+    gap: 12px;
+  }
+
+  .ant-btn.fab {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .calendar-title {
+    font-size: 16px;
+  }
+
+  .calendar-card .ant-card-body {
+    padding: 8px;
+  }
+
+  .calendar-card .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+    margin: 0 1px;
+    padding: 2px;
+  }
+
+  .calendar-card .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-value {
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .calendar-card .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-content {
+    height: 40px;
+  }
+}
